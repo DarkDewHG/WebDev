@@ -1,0 +1,16 @@
+{% extends "blog/home.html" %}
+{% block content %}
+{% for post in posts %}
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-1 text-muted">{{ post.author }}</strong>
+                <h3 class="mb-0">{{ post.title }}</h3>
+                    <div class="mb-1 text-muted">{{ post.date_posted|date:"d F, Y" }}</div>
+                    <h3 class="mb-0">{{ post.content }}</h3>
+                    <p class="card-text mb-auto">{{ post.content }}</p>
+
+                            <!-- <a href="serp.png"><img src=serp.png class="rounded float-right" alt="Responsive image" width="200" height="200"></a> -->
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
