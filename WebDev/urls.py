@@ -16,8 +16,9 @@ Including another URLconf
 from django.urls import include
 from usersblock.views import registration
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('mainblock.urls')),
 ]
