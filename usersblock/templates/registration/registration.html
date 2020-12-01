@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <button type="submit">GO</button>
+</form>
 
 </body>
 </html>

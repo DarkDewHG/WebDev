@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for post in object_list %}
+        <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+        <h3>{{ post.date_posted }}</h3>
+        <h3>{{ post.content }}</h3>
+        <h2>{{ post.author }}</h2>
+        <h6>--------------------------</h6>
+    {% endfor %}
+{% endblock content %}
