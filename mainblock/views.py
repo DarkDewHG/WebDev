@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView,CreateView,UpdateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy,reverse
 from django.shortcuts import HttpResponseRedirect
@@ -30,9 +30,19 @@ class PostCreateView(CreateView):
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.object.get_absolute_url())
 
 
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'mainblock/edit-post.html'
+    fields = ['title','content','date_posted','author']
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'mainblock/delete-post.html'
+    success_url = reverse_lazy('home')
 
 
 

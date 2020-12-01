@@ -4,5 +4,17 @@
         <h3>{{ post.date_posted }}</h3>
         <h3>{{ post.content }}</h3>
         <h2>{{ post.author }}</h2>
-        <h6>--------------------------</h6>
+    {% if user.is_superuser %}
+        <a href="{% url 'post_edit' post.id %}">Edit post</a>
+    {%endif  %}
+    {% if user.id == post.author.id or user.is_superuser %}
+        <a href="{% url 'post_delete' post.id %}">delete</a>
+    {% endif %}
+
+    {% for comment in object.comment_set.all %}
+        <h6>{{ comment.author }}</h6>
+        <h6>------------------</h6>
+        <h6>{{ comment.content }}</h6>
+        <h6>======================</h6>
+    {% endfor %}
 {% endblock content %}
