@@ -26,6 +26,6 @@ class Comment (models.Model):
         return self.content
 
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse('post_detail',args=[str(self.post.id)])
 
 

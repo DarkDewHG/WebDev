@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.shortcuts import render,redirect
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView,FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy,reverse
 from django.shortcuts import HttpResponseRedirect
-from .models import Post
+from .models import Post,Comment
+from .forms import CommentCreateForm
 
 
 class PostListView(LoginRequiredMixin,ListView):
@@ -14,10 +15,36 @@ class PostListView(LoginRequiredMixin,ListView):
     ordering = ['-date_posted']
 
 
-class PostDetailView(DetailView):
-    model = Post
+def post_detail_view(request,pk):
+    if request.method == 'POST':
+        form = CommentCreateForm(request.POST)
+        #f = CommentCreateForm(initial={'author': request.user, 'post': Post.objects.get(id = pk)})
+        post = Post.objects.get(id=pk)
+        print(form)
+        if form.is_valid():
+            com = form.save(commit=False)
+            com.author = request.user
+            com.post = Post.objects.get(id = pk)
+            com.save()
+        return redirect(post.get_absolute_url())
+    else:
+        form = CommentCreateForm()
+        object = Post.objects.get(id = pk)
+        return render(request,'mainblock/post-detail.html',{'form': form, 'object': object})
+
+
+
+
+"""class PostDetailView(CreateView):
+    model = Comment
     template_name = "mainblock/post-detail.html"
-    context_object_name = 'post'
+    extra_context = 'post'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.object.get_absolute_url())"""
 
 
 class PostCreateView(CreateView):

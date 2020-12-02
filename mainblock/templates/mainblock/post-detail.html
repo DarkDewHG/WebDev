@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-        <h1>{{ post.title }}</h1>
-        <h3>{{ post.date_posted }}</h3>
-        <h3>{{ post.content }}</h3>
-        <h2>{{ post.author }}</h2>
+        <h1>{{ object.title }}</h1>
+        <h3>{{ object.date_posted }}</h3>
+        <h3>{{ object.content }}</h3>
+        <h2>{{ object.author }}</h2>
     {% if user.is_superuser %}
-        <a href="{% url 'post_edit' post.id %}">Edit post</a>
+        <a href="{% url 'post_edit' object.id %}">Edit post</a>
     {%endif  %}
-    {% if user.id == post.author.id or user.is_superuser %}
-        <a href="{% url 'post_delete' post.id %}">delete</a>
+    {% if user.id == object.author.id or user.is_superuser %}
+        <a href="{% url 'post_delete' object.id %}">delete</a>
     {% endif %}
-
+    <form method="post" action="{% url 'post_detail' object.id%}">     {% csrf_token %}
+        {{ form.content }}
+    <button type="submit">Click me</button>
+    </form>
+            <h1><><><><><><><<><><><><><><><><><><><><><><><><><><</h1>
     {% for comment in object.comment_set.all %}
         <h6>{{ comment.author }}</h6>
         <h6>------------------</h6>
