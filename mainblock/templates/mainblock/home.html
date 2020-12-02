@@ -4,7 +4,7 @@
         <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
         <h3>{{ post.date_posted }}</h3>
         <h3>{{ post.content }}</h3>
-        <h2>{{ post.author }}</h2>
+        <h2><a href="{% url 'profile' post.author.id %}">{{ post.author }}</a></h2>
         <h6>--------------------------</h6>
         <h6>{{ post.comment_set.last.author }}</h6>
         <h6>{{ post.comment_set.last.content }}</h6>

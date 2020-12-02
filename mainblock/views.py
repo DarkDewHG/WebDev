@@ -18,9 +18,7 @@ class PostListView(LoginRequiredMixin,ListView):
 def post_detail_view(request,pk):
     if request.method == 'POST':
         form = CommentCreateForm(request.POST)
-        #f = CommentCreateForm(initial={'author': request.user, 'post': Post.objects.get(id = pk)})
         post = Post.objects.get(id=pk)
-        print(form)
         if form.is_valid():
             com = form.save(commit=False)
             com.author = request.user
