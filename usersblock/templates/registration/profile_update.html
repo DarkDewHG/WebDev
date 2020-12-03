@@ -1,13 +1,32 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-    {{ object.user.id }}
-        <h1>{{ object.user.username }}</h1>
-        <h3>{{ object.nickname }}</h3>
-        <img width="100" height="100" src="{{ object.image.url }}">
-
-
-    <form method="post" enctype="multipart/form-data">     {% csrf_token %}
-        {{ form }}
-    <button type="submit" value="Update">Click me</button>
+<br>
+<div class="container">
+    <div class="container">
+                    <div class="row ">
+                         </div>
+                        <div class="col no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light p-1">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+        <form method="post" enctype="multipart/form-data">     {% csrf_token %}
+        {{ form|crispy }}
+    <button type="submit" value="Update" class=" btn-success btn-lg btn-block">Update Profile</button>
     </form>
+    </div>
+    <div class=".col-6 .col-md-4"> 
+      <img width="300" height="300" class="rounded" src="{{ object.image.url }}"> 
+      <!-- Проверку на ранг-->  
+        <p class="text-center">РанкНаим</p>    
+        <!-- Проверку на ранг-->  
+      </div> 
+  </div>
+<br>
+
+
+   
+                             </div>
+    </div>
+</div>
 {% endblock content %}

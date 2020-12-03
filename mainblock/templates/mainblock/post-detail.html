@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
+<br>
         <div class="container-fluid ">
             
                         <div class="row no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light py-3"> 
@@ -15,7 +17,8 @@
                             
                 </div>
             </div>
-
+<a href="#Cform" type="submit" class="btn-dark btn-lg btn-block text-center">Хочу оставить коммент</a>
+<br>
 <!-- Comments -->
 {% for comment in object.comment_set.all %}
                 <div class="container">
@@ -29,10 +32,11 @@
                 </div> 
 {% endfor %}
 <!-- End Comments -->
-<div class="container">
+<div class="container" id="Cform">
+    
     <form method="post" action="{% url 'post_detail' object.id%}" class="">
         <div class="form-group">{% csrf_token %}
-        {{ form.content }}
+        {{ form|crispy }}
         </div>
     <button type="submit" class=" btn-primary btn-lg btn-block">Send</button>
     </form>

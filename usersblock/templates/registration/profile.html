@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 <br>
 <div class="container">
@@ -7,29 +8,24 @@
         <!-- Никнейм--> 
      <h1>Никнейм</h1>
         <!-- Логин--> 
-     <h3 class="pl-5">@{{Логин}}</h3>
+     <p class="text-muted">@Логин</p>
         <!-- Биография--> 
     <p> Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico  </p>   <!-- Сюда био-->  
     
     {% if user.id == object.user.id or user.is_superuser %}
-    <a href="{% url 'profile_update' object.id%}">Edit Pic</a>
-    {% endif %}
-    {% if user.id == object.user.id or user.is_superuser %}
-    <a href="{% url 'profile_update' object.id%}">Edit Bio</a>
+    <a href="{% url 'profile_update' object.id%}">Edit Profile</a>
     {% endif %}
     </div>
     <div class=".col-6 .col-md-4"> 
-      <img width="200" height="200" class="rounded" src="/media/default.jpg"> 
+      <img width="300" height="300" class="rounded" src="/media/default.jpg"> 
       <!-- Проверку на ранг-->  
         <p class="text-center">РанкНаим</p>    
         <!-- Проверку на ранг-->  
       </div> 
   </div>
 <br>
-    <form method="post" action="{% url 'profile' object.user.id %}">     {% csrf_token %}
-        {{ form.content }}
-    <button type="submit">Comment</button>
-    </form>
+    
+    <a href="#Cform" type="submit" class="btn-dark btn-lg btn-block text-center">Хочу оставить коммент</a>
     {% for comment in object.comments.all %}
     <div class="container ">
                 <div class="py-2"></div>
@@ -46,4 +42,8 @@
     </div>
 
     {% endfor %}
+        <form method="post" action="{% url 'profile' object.user.id %}" id="Cform">     {% csrf_token %}
+        {{ form|crispy  }}
+    <button type="submit" class="btn-primary btn-lg btn-block">Comment</button>
+    </form>
 {% endblock content %}

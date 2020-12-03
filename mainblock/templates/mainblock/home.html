@@ -5,22 +5,13 @@
         <div class="container-fluid ">
             
                         <div class="row no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light py-3"> 
-                <div class="col p-4 d-flex flex-column position-static">
+                <div class="col p-1 d-flex flex-column position-static">
                     <h1 class="text-center ml-3">Welcome.</h1> <!-- Post title -->     
-                    <p class="text-md-left-justify px-3 ">на сайте запрещено:<br>
-*использование д-дос атак, спама, скриптов и прочих хитростей<br>
-*использование ссылок-обманок и картинок с эротическим содержанием<br>
-*использование уязвимостей <s>карт</s> работы программистов<br>
-*мат в любом проявлении<br>
-слово "<s><i>сука</i></s>" хоть и литературное, но на сервере расценивается как мат<br>
-*оскорбления игроков<br>
-*использование нечитаемых ников, ников содежащие мат, цифровых ников<br>
-<br>
-                    <p class="text-md-center ">всё это карается баном</p></p></div>
+                    </div>
                 </div>
             </div>
             {% for post in object_list %}
-            <div class="container  border border-dark rounded">
+            <div class="container  ">
                 <div class="py-2"></div>
                   
                 <!--Post-->
@@ -28,7 +19,7 @@
                 <div class="col p-4 d-flex flex-column position-static">
                     <a href="{% url 'post_detail' post.id %}" class="text-white font-weight-bold"><h2 class="text-justify ml-3">{{ post.title }}</h2></a> <!-- Post title -->
                     <p class="text-md-left-justify px-3 ">{{ post.content }}</p>
-                    <p class="text-sm-right font-weight-light text-#333333"> <a href="{% url 'profile' post.author.id %}" class="text-light">@{{ post.author }}</a> Date: {{ post.date_posted }}</p>
+                    <p class="text-sm-right font-weight-light text-#333333"> <a href="{% url 'profile' post.author.id %}" class="text-light"><img width="30" height="30" class="rounded-circle" src="123.png">@{{ post.author }}</a> Date: {{ post.date_posted }}</p>
                     
                 </div>
             </div><!--End post-->
@@ -40,7 +31,7 @@
                         <div class="col no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light">
                             <p class="font-weight-light">Last comment <a href="{% url 'profile' post.comment_set.last.author.id %}" class="text-muted">@{{ post.comment_set.last.author  }}:</a></p>
                             <a href="{% url 'post_detail' post.id %}" class="text-white p-3">{{ post.comment_set.last.content  }}</a><!-- Comments Content -->
-                            <p class="text-sm-right font-weight-light text-muted"> <a href="{% url 'profile' post.comment_set.last.author.id %}" class="text-muted">@{{ post.comment_set.last.author  }}</a></p> <!-- ComAvtor -->
+                            <p class="text-sm-right font-weight-light text-muted"> <a href="{% url 'profile' post.comment_set.last.author.id %}" class="text-muted"><img width="30" height="30" class="rounded-circle" src="123.png">@{{ post.comment_set.last.author  }}</a></p> <!-- ComAvtor -->
                         </div>
                     </div>
                 </div> <!-- End Comments -->
