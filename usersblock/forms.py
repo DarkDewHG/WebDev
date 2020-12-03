@@ -1,4 +1,4 @@
-from .models import CommentProfile
+from .models import CommentProfile,Profile
 from django import forms
 
 
@@ -11,3 +11,8 @@ class CommentProfileCreateForm(forms.ModelForm):
             self.author = kwargs.pop('user')
             self.post = kwargs.pop('post')
             super(CommentProfileCreateForm, self).__init__(*args,**kwargs)
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('image','nickname')

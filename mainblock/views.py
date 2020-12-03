@@ -32,19 +32,6 @@ def post_detail_view(request,pk):
 
 
 
-
-"""class PostDetailView(CreateView):
-    model = Comment
-    template_name = "mainblock/post-detail.html"
-    extra_context = 'post'
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.author = self.request.user
-        self.object.save()
-        return HttpResponseRedirect(self.object.get_absolute_url())"""
-
-
 class PostCreateView(CreateView):
     model = Post
     template_name = 'mainblock/create-post.html'

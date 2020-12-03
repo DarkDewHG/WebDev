@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    {{ object.user.id }}
+        <h1>{{ object.user.username }}</h1>
+        <h3>{{ object.nickname }}</h3>
+        <img width="100" height="100" src="{{ object.image.url }}">
+
+
+    <form method="post" enctype="multipart/form-data">     {% csrf_token %}
+        {{ form }}
+    <button type="submit" value="Update">Click me</button>
+    </form>
+{% endblock content %}

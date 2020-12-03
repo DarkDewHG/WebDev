@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-        <h1>{{ object.user.username }}</h1>
-        <h3>{{ Profile.nickname }}</h3>
+        <h1>@{{ object.user.username }}</h1>
+        <h3>{{ object.nickname }}</h3>
         <img width="100" height="100" src="{{ object.image.url }}">
-    {% comment %}
-   {% if user.is_superuser %}
-        <a href="{% url 'post_edit' object.id %}">Edit post</a>
-    {%endif  %}
-    {% if user.id == object.author.id or user.is_superuser %}
-        <a href="{% url 'post_delete' object.id %}">delete</a>
+
+    {% if user.id == object.user.id or user.is_superuser %}
+        <a href="{% url 'profile_update' object.id%}">edit</a>
     {% endif %}
-    {% endcomment %}
+
     <form method="post" action="{% url 'profile' object.user.id %}">     {% csrf_token %}
         {{ form.content }}
     <button type="submit">Click me</button>
