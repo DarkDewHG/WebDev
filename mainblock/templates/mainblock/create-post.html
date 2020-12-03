@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
+    <div class="container">
+                    <div class="row ">
+                         </div>
+                        <div class="col no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light p-1">
 <form method="POST">
 {% csrf_token %}
 {{ form }}
-<button type="submit">Hey click</button>
+<button type="submit" class=" btn-success btn-lg btn-block">Create Post</button>
 </form>
+                            </div>
+    </div>
+</div>
 {% endblock content %}
