@@ -35,7 +35,7 @@ def post_detail_view(request,pk):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'mainblock/create-post.html'
-    fields = ['title','content']
+    fields = ['title','content','for_approved','is_pinned']
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):

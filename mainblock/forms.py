@@ -5,7 +5,7 @@ from django import forms
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ('author','date_posted')
+        exclude = ('author','date_posted','is_pinned')
 
         def __init__(self, *args, **kwargs):
             self.author = kwargs.pop('user')
