@@ -27,7 +27,7 @@
               </ul> 
                             <ul class="navbar-nav mr-right">
                 <li class="nav-item">
-                    <img src="daynight.svg" href="#" class="nav-link" onclick="ThemeChanger()" class="nav-link" width="40"></img>
+                    <img src="/media/daynight.svg" href="#" class="nav-link" onclick="ThemeChanger()" class="nav-link" width="40"></img>
                 </li>   
                 <li class="nav-item">
                     <a href="{% url 'post_create' %}" class="nav-link">Post</a>
@@ -55,7 +55,52 @@
 
 
  {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+        <!-- Никнейм--> 
+     <h1>Никнейм</h1>
+        <!-- Логин--> 
+     <h3 class="pl-5">@{{Логин}}</h3>
+        <!-- Биография--> 
+    <p> Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico Bio, i was born in little city near NewMexico  </p>   <!-- Сюда био-->  
+    
+    {% if user.id == object.user.id or user.is_superuser %}
+    <a href="{% url 'profile_update' object.id%}">Edit Pic</a>
+    {% endif %}
+    {% if user.id == object.user.id or user.is_superuser %}
+    <a href="{% url 'profile_update' object.id%}">Edit Bio</a>
+    {% endif %}
+    </div>
+    <div class=".col-6 .col-md-4"> 
+      <img width="200" height="200" class="rounded" src="/media/default.jpg"> 
+      <!-- Проверку на ранг-->  
+        <p class="text-center">РанкНаим</p>    
+        <!-- Проверку на ранг-->  
+      </div> 
+  </div>
+<br>
+    <form method="post" action="{% url 'profile' object.user.id %}">     {% csrf_token %}
+        {{ form.content }}
+    <button type="submit">Comment</button>
+    </form>
+    {% for comment in object.comments.all %}
+    <div class="container ">
+                <div class="py-2"></div>
+                  
+                <!--Post-->
+            <div class="row  border-dark rounded overflow-hidden flex-md-row mb-3 shadow-sm h-md-250 position-relative divcolor text-light "> 
+                <div class="col p-3 d-flex flex-column position-static">
+                    <!-- Текст комментария--> 
+                    <p>Текст комментария</p>
+                    <!-- Автор комента--> 
+                    <a href="{% url 'profile' comment.author.id %}" class="text-light "><p class="text-muted text-right">Автор комента</p></a>
+                </div>
+        </div>
+        
 
+    {% endfor %}
+        
 {% endblock content %}
 
 

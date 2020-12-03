@@ -26,12 +26,13 @@
                 <!--Post-->
             <div class="row no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light py-3"> 
                 <div class="col p-4 d-flex flex-column position-static">
-                    <a href="{% url 'post_detail' post.id %}" class="text-white font-weight-bold"><h2 class="text-justify ml-3">{{ object.title }}</h2></a> <!-- Post title -->
-                    <p class="text-md-left-justify px-3 ">{{ object.content }}</p>
-                    <p class="text-sm-right font-weight-light text-#333333"> <a href="{% url 'profile' post.author.id %}" class="text-light">@{{ object.author }}</a> Date: {{ object.date_posted }}</p>
+                    <a href="{% url 'post_detail' post.id %}" class="text-white font-weight-bold"><h2 class="text-justify ml-3">{{ post.title }}</h2></a> <!-- Post title -->
+                    <p class="text-md-left-justify px-3 ">{{ post.content }}</p>
+                    <p class="text-sm-right font-weight-light text-#333333"> <a href="{% url 'profile' post.author.id %}" class="text-light">@{{ post.author }}</a> Date: {{ post.date_posted }}</p>
                     
                 </div>
             </div><!--End post-->
+                {% if  post.comment_set.last %}
                 <div class="container"><!-- Comments -->
                     <div class="w-25"> </div>
                     <div class="row ">
@@ -43,6 +44,7 @@
                         </div>
                     </div>
                 </div> <!-- End Comments -->
+                {% endif  %}
                 
         </div>
     {% endfor %}
