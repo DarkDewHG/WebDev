@@ -9,6 +9,7 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=50)
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     is_approved = models.BooleanField(default=False)
+    rank_name = models.CharField(max_length=50, default='')
 
     def save(self):
         super().save()
