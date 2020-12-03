@@ -1,13 +1,22 @@
+
 {% extends 'base.html' %}
 
 
 {% block content %}
+<div class="container">
+    <div class="container">
+                    <div class="row ">
+                         </div>
+                        <div class="col no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light p-1">
     {% if user.id == object.author.id or user.is_superuser %}
         <form method="post"> {% csrf_token %}
             <p>are you sure you want to delete "{{ object.title }}"</p>
-            <input type="submit" value="Confirm">
+            <input type="submit" value="Confirm" class=" btn-warning btn-lg btn-block">
         </form>
     {% else %}
         <h1>YOU ARE RESTRICTED TO BE HERE</h1>
     {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}

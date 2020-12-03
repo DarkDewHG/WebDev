@@ -9,6 +9,8 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=50)
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     is_approved = models.BooleanField(default=False)
+    rank_name = models.CharField(max_length=50, default='')
+    bio = models.TextField(max_length=400,default='')
 
     def save(self):
         super().save()
@@ -20,6 +22,12 @@ class Profile(models.Model):
 
     def get_porfile_owner(self):
         return self.user
+
+    def get_profile_name(self):
+        if self.rank_name != '':
+            return f'{self.nickname} [{self.rank_name}]'
+        else:
+            return f'{self.nickname}'
 
     def __str__(self):
         return f'{self.user.username} Profile'
