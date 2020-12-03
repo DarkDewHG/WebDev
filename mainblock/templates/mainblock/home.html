@@ -5,9 +5,11 @@
         <h3>{{ post.date_posted }}</h3>
         <h3>{{ post.content }}</h3>
         <h2><a href="{% url 'profile' post.author.id %}">{{ post.author }}</a></h2>
+        {% if post.comment_set.last %}
         <h6>--------------------------</h6>
-        <h6>{{ post.comment_set.last.author }}</h6>
+        <h6><a href="{% url 'profile' post.comment_set.last.author.pk  %}">{{ post.comment_set.last.author }}</a></h6>
         <h6>{{ post.comment_set.last.content }}</h6>
+        {% endif %}
         <h3>====================================</h3>
     {% endfor %}
 {% endblock content %}

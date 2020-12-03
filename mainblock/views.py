@@ -12,7 +12,7 @@ class PostListView(LoginRequiredMixin,ListView):
     redirect_field_name = reverse_lazy('login')
     model = Post
     template_name = "mainblock/home.html"
-    ordering = ['-date_posted']
+    ordering = ['-is_pinned','-date_posted']
 
 
 def post_detail_view(request,pk):

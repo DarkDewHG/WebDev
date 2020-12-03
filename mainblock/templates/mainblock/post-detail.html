@@ -16,7 +16,7 @@
     </form>
             <h1><><><><><><><<><><><><><><><><><><><><><><><><><><</h1>
     {% for comment in object.comment_set.all %}
-        <h6>{{ comment.author }}</h6>
+        <h6><a href="{% url 'profile' comment.author.id %}">{{ comment.author }}</a></h6>
         <h6>------------------</h6>
         <h6>{{ comment.content }}</h6>
         <h6>======================</h6>
