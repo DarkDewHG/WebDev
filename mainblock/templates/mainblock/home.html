@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     {% for post in object_list %}
+        {% if post.for_approved == False or post.for_approved and user.profile.is_approved or user.is_superuser%}
         <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
         <h3>{{ post.date_posted }}</h3>
         <h3>{{ post.content }}</h3>
@@ -11,5 +12,6 @@
         <h6>{{ post.comment_set.last.content }}</h6>
         {% endif %}
         <h3>====================================</h3>
+        {% endif %}
     {% endfor %}
 {% endblock content %}

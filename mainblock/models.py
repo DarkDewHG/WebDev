@@ -10,6 +10,7 @@ class Post (models.Model):
     content = models.TextField(max_length=10000) # текст поста
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     is_pinned = models.BooleanField(default=False)
+    for_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
