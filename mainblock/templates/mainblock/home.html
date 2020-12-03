@@ -1,17 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% for post in object_list %}
-        {% if post.for_approved == False or post.for_approved and user.profile.is_approved or user.is_superuser%}
-        <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
-        <h3>{{ post.date_posted }}</h3>
-        <h3>{{ post.content }}</h3>
-        <h2><a href="{% url 'profile' post.author.id %}">{{ post.author }}</a></h2>
-        {% if post.comment_set.last %}
-        <h6>--------------------------</h6>
-        <h6><a href="{% url 'profile' post.comment_set.last.author.pk  %}">{{ post.comment_set.last.author }}</a></h6>
-        <h6>{{ post.comment_set.last.content }}</h6>
-        {% endif %}
-        <h3>====================================</h3>
-        {% endif %}
+    
+<div class="py-2"></div>
+        <div class="container-fluid ">
+            
+                        <div class="row no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light py-3"> 
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h1 class="text-center ml-3">Welcome.</h1> <!-- Post title -->     
+                    <p class="text-md-left-justify px-3 ">на сайте запрещено:<br>
+*использование д-дос атак, спама, скриптов и прочих хитростей<br>
+*использование ссылок-обманок и картинок с эротическим содержанием<br>
+*использование уязвимостей <s>карт</s> работы программистов<br>
+*мат в любом проявлении<br>
+слово "<s><i>сука</i></s>" хоть и литературное, но на сервере расценивается как мат<br>
+*оскорбления игроков<br>
+*использование нечитаемых ников, ников содежащие мат, цифровых ников<br>
+<br>
+                    <p class="text-md-center ">всё это карается баном</p></p></div>
+                </div>
+            </div>
+            {% for post in object_list %}
+            <div class="container  border border-dark rounded">
+                <div class="py-2"></div>
+                  
+                <!--Post-->
+            <div class="row no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light py-3"> 
+                <div class="col p-4 d-flex flex-column position-static">
+                    <a href="{% url 'post_detail' post.id %}" class="text-white font-weight-bold"><h2 class="text-justify ml-3">{{ object.title }}</h2></a> <!-- Post title -->
+                    <p class="text-md-left-justify px-3 ">{{ object.content }}</p>
+                    <p class="text-sm-right font-weight-light text-#333333"> <a href="{% url 'profile' post.author.id %}" class="text-light">@{{ object.author }}</a> Date: {{ object.date_posted }}</p>
+                    
+                </div>
+            </div><!--End post-->
+                <div class="container"><!-- Comments -->
+                    <div class="w-25"> </div>
+                    <div class="row ">
+                        <div class="w-25"> </div>
+                        <div class="col no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light">
+                            <p class="font-weight-light">Last comment <a href="{% url 'profile' post.comment_set.last.author.id %}" class="text-muted">@{{ post.comment_set.last.author  }}:</a></p>
+                            <a href="{% url 'post_detail' post.id %}" class="text-white p-3">{{ post.comment_set.last.content  }}</a><!-- Comments Content -->
+                            <p class="text-sm-right font-weight-light text-muted"> <a href="{% url 'profile' post.comment_set.last.author.id %}" class="text-muted">@{{ post.comment_set.last.author  }}</a></p> <!-- ComAvtor -->
+                        </div>
+                    </div>
+                </div> <!-- End Comments -->
+                
+        </div>
     {% endfor %}
+               
 {% endblock content %}

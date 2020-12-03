@@ -1,24 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-        <h1>{{ object.title }}</h1>
-        <h3>{{ object.date_posted }}</h3>
-        <h3>{{ object.content }}</h3>
-        <h2>{{ object.author }}</h2>
-    {% if user.is_superuser %}
+        <div class="container-fluid ">
+            
+                        <div class="row no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light py-3"> 
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h1 class="text-left pl-5 ml-3">{{ object.title }}</h1> <!-- Post title -->     
+                    <p class="text-md-left-justify px-3 ">{{ object.content }}</p>
+                    <p class="text-sm-right font-weight-light "> <a href="{% url 'profile' post.author.id %}" class="text-light"><img width="30" height="30" class="rounded-circle" src="123.png"> @{{ object.author }}</a> Date: {{ object.date_posted }} {% if user.is_superuser %}
         <a href="{% url 'post_edit' object.id %}">Edit post</a>
     {%endif  %}
     {% if user.id == object.author.id or user.is_superuser %}
-        <a href="{% url 'post_delete' object.id %}">delete</a>
-    {% endif %}
-    <form method="post" action="{% url 'post_detail' object.id%}">     {% csrf_token %}
+        <a href="{% url 'post_delete' object.id %}">Delete</a>
+    {% endif %}</p></div>  
+                            
+                </div>
+            </div>
+
+<!-- Comments -->
+{% for comment in object.comment_set.all %}
+                <div class="container">
+                    <div class="row ">
+                         </div>
+                        <div class="col no-gutters border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative divcolor text-light p-1">
+                            <p class="font-weight-light"> <a href="{% url 'profile' post.comment_set.last.author.id %}" class="text-muted "><img width="30" height="30" class="rounded-circle" src="123.png">@{{ post.comment_set.last.author  }}</a> :</p>
+                            <p class="text-white pl-4">{{ post.comment_set.last.content  }}</a><!-- Comments Content -->
+                        </div>
+                    </div>
+                </div> 
+{% endfor %}
+<!-- End Comments -->
+<div class="container">
+    <form method="post" action="{% url 'post_detail' object.id%}" class="">
+        <div class="form-group">{% csrf_token %}
         {{ form.content }}
-    <button type="submit">Click me</button>
+        </div>
+    <button type="submit" class=" btn-primary btn-lg btn-block">Send</button>
     </form>
-            <h1><><><><><><><<><><><><><><><><><><><><><><><><><><</h1>
-    {% for comment in object.comment_set.all %}
-        <h6><a href="{% url 'profile' comment.author.id %}">{{ comment.author }}</a></h6>
-        <h6>------------------</h6>
-        <h6>{{ comment.content }}</h6>
-        <h6>======================</h6>
-    {% endfor %}
+</div>
 {% endblock content %}
