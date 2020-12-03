@@ -5,16 +5,17 @@ from django.urls import reverse_lazy,reverse
 from django.shortcuts import HttpResponseRedirect
 from .models import Post,Comment
 from .forms import CommentCreateForm
+from django.contrib.auth.decorators import login_required
 
 
-class PostListView(LoginRequiredMixin,ListView):
+class PostListView(ListView):
     login_url = '/login/'
     redirect_field_name = reverse_lazy('login')
     model = Post
     template_name = "mainblock/home.html"
     ordering = ['-is_pinned','-date_posted']
 
-
+@login_required()
 def post_detail_view(request,pk):
     if request.method == 'POST':
         form = CommentCreateForm(request.POST)
@@ -32,7 +33,7 @@ def post_detail_view(request,pk):
 
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'mainblock/create-post.html'
     fields = ['title','content','for_approved','is_pinned']
@@ -45,13 +46,13 @@ class PostCreateView(CreateView):
         return HttpResponseRedirect(self.object.get_absolute_url())
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'mainblock/edit-post.html'
     fields = ['title','content','date_posted','author']
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'mainblock/delete-post.html'
     success_url = reverse_lazy('home')

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    {{ object.user.id }}
+    {% if user.is_superuser %}
         <h1>{{ object.user.username }}</h1>
         <h3>{{ object.nickname }}</h3>
         <img width="100" height="100" src="{{ object.image.url }}">
@@ -10,4 +10,7 @@
         {{ form }}
     <button type="submit" value="Update">Click me</button>
     </form>
+        {% else %}
+        GO AWAY YOU LITTLE SLUT
+    {% endif %}
 {% endblock content %}

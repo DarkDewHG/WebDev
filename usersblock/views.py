@@ -8,7 +8,7 @@ from .forms import CommentProfileCreateForm,ProfileUpdateForm
 from .models import Profile
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-
+from django.contrib.auth.decorators import login_required
 
 class RegisterView(CreateView):
     template_name = 'registration/registration.html'
@@ -19,7 +19,7 @@ class RegisterView(CreateView):
         form.save()
         return HttpResponseRedirect(self.success_url)
 
-
+@login_required()
 def profile_view(request,pk):
     if request.method == 'POST':
         form = CommentProfileCreateForm(request.POST)
@@ -35,7 +35,7 @@ def profile_view(request,pk):
         object = User.objects.get(id=pk).profile
         return render(request,'registration/profile.html',{'form': form, 'object': object})
 
-
+@login_required()
 def profile_update_view(request,pk):
     prof = Profile.objects.get(id= pk)
     if request.method == 'POST':

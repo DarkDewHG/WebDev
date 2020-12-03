@@ -15,4 +15,4 @@ class CommentProfileCreateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('image','nickname')
+        fields = ('image','nickname','rank_name','is_approved')
