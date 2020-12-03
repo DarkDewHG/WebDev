@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+        <h1>@{{ object.user.username }}</h1>
+        <h3>{{ object.nickname }}</h3>
+        <img width="100" height="100" src="{{ object.image.url }}">
+
+    {% if user.id == object.user.id or user.is_superuser %}
+        <a href="{% url 'profile_update' object.id%}">edit</a>
+    {% endif %}
+
+    <form method="post" action="{% url 'profile' object.user.id %}">     {% csrf_token %}
+        {{ form.content }}
+    <button type="submit">Click me</button>
+    </form>
+            <h1><><><><><><><<><><><><><><><><><><><><><><><><><><</h1>
+    {% for comment in object.comments.all %}
+        <h6>{{ comment.author }}</h6>
+        <h6>------------------</h6>
+        <h6>{{ comment.content }}</h6>
+        <h6>======================</h6>
+    {% endfor %}
+{% endblock content %}

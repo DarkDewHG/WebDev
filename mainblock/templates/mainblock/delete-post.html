@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if user.id == object.author.id or user.is_superuser %}
+        <form method="post"> {% csrf_token %}
+            <p>are you sure you want to delete "{{ object.title }}"</p>
+            <input type="submit" value="Confirm">
+        </form>
+    {% else %}
+        <h1>YOU ARE RESTRICTED TO BE HERE</h1>
+    {% endif %}
+{% endblock content %}
