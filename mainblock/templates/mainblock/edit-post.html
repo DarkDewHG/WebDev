@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<title>Edit {{ object.title }}</title>
 <div class="container">
 <form method="post">
     {% csrf_token %}
